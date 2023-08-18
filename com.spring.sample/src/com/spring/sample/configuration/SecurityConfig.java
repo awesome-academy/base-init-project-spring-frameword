@@ -2,6 +2,7 @@ package com.spring.sample.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,6 +19,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.accept.ContentNegotiationStrategy;
 
 import com.spring.sample.entity.Role;
+import com.spring.sample.handler.CustomAccessDeniedHandler;
 import com.spring.sample.service.UserService;
 
 @Configuration
@@ -46,22 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		super.setContentNegotationStrategy(contentNegotiationStrategy);
 	}
 
-//	@Bean
-//    @Override
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return super.authenticationManagerBean();
-//    }
-
-//	@Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder authentication)
-//            throws Exception
-//    {
-//        authentication.inMemoryAuthentication()
-//                .withUser("admin")
-//                .password(passwordEncoder.encode("admin"))
-//                .authorities("ROLE_USER");
-//    }
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/resources/**").permitAll().antMatchers("/webjars/**").permitAll()
@@ -82,13 +68,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"script-src 'self' https://trustedscripts.example.com; object-src https://trustedplugins.example.com; report-uri /csp-report-endpoint/");
 //			.httpBasic();
 	}
-	// Khi muốn custom handle access denied
-//	@Bean
-//	public AccessDeniedHandler accessDeniedHandler(){
-//	    return new CustomAccessDeniedHandler();
-//	}
 
-//	@Bean
+	// Khi muốn custom handle access denied
+	@Bean
+	public AccessDeniedHandler accessDeniedHandler() {
+		return new CustomAccessDeniedHandler();
+	}
+
+	@Bean
 	public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
 		return new SimpleUrlAuthenticationSuccessHandler();
 	}
@@ -102,22 +89,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
 	}
-
-//	@Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-
-//	@Bean
-//    public DaoAuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-//        auth.setUserDetailsService(userService);
-//        auth.setPasswordEncoder(passwordEncoder);
-//        return auth;
-//    }
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(authenticationProvider());
-//    }
 }

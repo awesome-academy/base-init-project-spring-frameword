@@ -14,8 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -39,7 +38,7 @@ public class StaticPagesController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	@GetMapping(value = "/test")
 	public String root(Locale locale, Model model, final RedirectAttributes redirectAttributes,
 			HttpServletRequest request) {
 		logger.info("Home Page Requested, locale = " + locale);
@@ -48,10 +47,9 @@ public class StaticPagesController {
 		flash.info("user.create.success");
 		flash.keep();
 		return "redirect: " + request.getContextPath() + "/users";
-//		return "home.page";
 	}
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@GetMapping(value = {"/", "/home"})
 	public String home(@RequestParam(name = "page", required = false) Optional<Integer> page, Locale locale, Model model, Authentication authentication, HttpServletRequest request) {
 		logger.info("Home Page Requested, locale = " + locale);
 		if(authentication != null && authentication.isAuthenticated()) {
@@ -67,25 +65,25 @@ public class StaticPagesController {
 		return "static_pages/home";
 	}
 
-	@RequestMapping(value = "/help", method = RequestMethod.GET)
+	@GetMapping(value = "/help")
 	public String help(Locale locale, Model model) {
 		logger.info("Home Page Requested, locale = " + locale);
 		return "static_pages/help";
 	}
 
-	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	@GetMapping(value = "/about")
 	public String about(Locale locale, Model model) {
 		logger.info("Home Page Requested, locale = " + locale);
 		return "static_pages/about";
 	}
 
-	@RequestMapping(value = "/contact", method = RequestMethod.GET)
+	@GetMapping(value = "/contact")
 	public String contact(Locale locale, Model model) {
 		logger.info("Home Page Requested, locale = " + locale);
 		return "static_pages/contact";
 	}
 
-	@RequestMapping(value = { "/access_denied" }, method = RequestMethod.GET)
+	@GetMapping(value = { "/access_denied" })
 	public String accessDenied() {
 		logger.info("Access denied");
 		return "access_denied";

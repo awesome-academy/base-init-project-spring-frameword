@@ -26,7 +26,7 @@ public class UserModel extends BaseModel {
 	private String confirmation = null;
 
 	private int role;
-	private int totalMicropost = 0;
+	private Long totalMicropost = 0L;
 
 	public UserModel() {
 
@@ -90,11 +90,11 @@ public class UserModel extends BaseModel {
 		this.role = role;
 	}
 
-	public int getTotalMicropost() {
+	public Long getTotalMicropost() {
 		return totalMicropost;
 	}
 
-	public void setTotalMicropost(int totalMicropost) {
+	public void setTotalMicropost(Long totalMicropost) {
 		this.totalMicropost = totalMicropost;
 	}
 

@@ -115,39 +115,6 @@
 	<bean name="handlerMapping"
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
-		in the /WEB-INF/views directory org.springframework.web.servlet.view.UrlBasedViewResolver -->
-	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/> 
-		<property name="order" value="1" /> <property name="cache" value="false" 
-		/> <property name="prefix" value="/jsp/" /> <property name="suffix" value=".jsp" 
-		/> </bean> -->
-
-	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver"> 
-		<property name="basename" value="views"/> </bean> -->
-
-	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/> -->
-
-	<!-- <bean name="redirect:executions" class="org.springframework.web.servlet.view.RedirectView"> 
-		<property name="url" value="#{resourceService.servletPath}/profile-{id}/executions" 
-		/> <property name="contextRelative" value="true" /> </bean> -->
-
-	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" 
-		> <property name="order" value="1" /> <property name="messageConverters"> 
-		<list> <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" 
-		> <property name="supportedMediaTypes" value="application/json"/> </bean> 
-		<bean class = "org.springframework.http.converter.StringHttpMessageConverter"> 
-		<property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" /> 
-		</bean> </list> </property> </bean> -->
-
-	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"> 
-		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" 
-		/> </bean> <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"> 
-		<property name="definitions"> <list> <value>/WEB-INF/defs/templates.xml</value> 
-		<value>/WEB-INF/defs/user.xml</value> </list> </property> <property name="preparerFactoryClass" 
-		value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory"/> 
-		</bean> -->
-
 	<!-- SpringResourceTemplateResolver automatically integrates with Spring's 
 		own -->
 	<!-- resource resolution infrastructure, which is highly recommended. -->

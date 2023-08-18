@@ -26,7 +26,7 @@ public class ViewSupportUtil {
 		return PrettyTime.of(locale).printRelativeInStdTimezone(Moment.from(date.toInstant()));
 	}
 
-//	public String pluralize(String text, int count) {
-//		return count + " " + Inflector.getInstance().pluralize(text, count);
-//	}
+	public String pluralize(String text, int count) {
+		return count + " ";
+	}
 }

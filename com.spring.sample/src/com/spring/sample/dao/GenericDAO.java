@@ -22,12 +22,6 @@ public interface GenericDAO<E extends BaseEntity, Id extends Serializable> {
 
 	List<E> findByExample(E exampleInstance, String[] excludeProperty);
 
-	int count(E exampleInstance, String[] excludeProperty, boolean isLike);
-
-	int count();
-
-	int count(Criterion... criterion);
-
 	E makePersistent(E entity) throws Exception;
 
 	void makeTransient(E entity) throws Exception;
@@ -37,5 +31,10 @@ public interface GenericDAO<E extends BaseEntity, Id extends Serializable> {
 	Timestamp getSystemTimestamp();
 
 	Page<E> paginate(Pageable pageable);
+//	int count(E exampleInstance, String[] excludeProperty, boolean isLike);
+//
+//	int count();
+//
+//	int count(Criterion... criterion);
 
 }

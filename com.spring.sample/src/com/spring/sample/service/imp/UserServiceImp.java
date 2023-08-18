@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import com.spring.sample.dao.UserDAO;
 import com.spring.sample.entity.Role;
 import com.spring.sample.entity.User;
 import com.spring.sample.model.CustomUserDetails;
@@ -26,21 +25,14 @@ import com.spring.sample.model.UserModel;
 import com.spring.sample.service.UserService;
 
 @Service
-public class UserServiceImp implements UserService {
+public class UserServiceImp extends BaseServiceImpl implements UserService {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImp.class);
-
-	@Autowired
-	private UserDAO userDAO;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	private UserServiceImp() {
-	}
-
-	public void setUserDAO(UserDAO userDAO) {
-		this.userDAO = userDAO;
 	}
 
 	@Override
@@ -61,7 +53,6 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-//	@Transactional(readOnly = true)
 	public boolean existingEmail(String email, Integer id) {
 		logger.info("Checking the user by email in the database");
 		try {
@@ -132,7 +123,6 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	@Transactional
 	public boolean deleteUser(UserModel userModel) throws Exception {
 		logger.info("Deleting the user in the database");
 		try {
@@ -175,7 +165,6 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	@Transactional
 	public void createNewToken(PersistentRememberMeToken token) {
 		try {
 			User user = userDAO.findUserByEmail(token.getUsername());
@@ -190,7 +179,6 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	@Transactional
 	public void updateToken(String series, String tokenValue, Date lastUsed) {
 		try {
 			User condition = new User();
@@ -222,7 +210,6 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	@Transactional
 	public void removeUserTokens(String username) {
 		try {
 			User user = userDAO.findUserByEmail(username);

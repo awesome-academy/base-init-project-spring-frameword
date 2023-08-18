@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -48,7 +47,6 @@ public class MicropostsController {
 	MessageSource messageSource;
 
 	@Autowired
-	@Qualifier("micropostService")
 	MicropostService micropostService;
 
 	@Resource
@@ -140,7 +138,7 @@ public class MicropostsController {
 			return new ResponseEntity<String>("{\"result\" : \"OK\", \"id\" : " + id + ", \"model\" : \"micropost\"}",
 					HttpStatus.OK);
 		} else {
-			response.sendRedirect(request.getContextPath() + "/microposts");
+			response.sendRedirect(request.getContextPath() + "/home");
 			return new ResponseEntity<String>(HttpStatus.OK);
 		}
 	}

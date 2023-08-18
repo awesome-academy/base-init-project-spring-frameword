@@ -18,6 +18,5 @@ public interface MicropostService {
 	List<MicropostModel> findAll(MicropostModel micropostModel);
 
 	Page<MicropostModel> paginate(MicropostModel micropostModel);
-
-	int count(MicropostModel micropostModel);
+	Long count(MicropostModel micropostModel);
 }

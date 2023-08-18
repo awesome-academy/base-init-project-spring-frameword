@@ -1,5 +1,8 @@
 package com.spring.sample.dao.imp;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Projections;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -24,6 +27,14 @@ public class MicropostDAOImp extends GenericDAOImp<Micropost, Integer> implement
 		searchQueryTemplate.addParameter("userId", micropost.getUserId());
 		searchQueryTemplate.addOrder(Direction.DESC, "createdAt");
 		return paginate(searchQueryTemplate);
+	}
+
+	@Override	
+	public Long count(Criterion... criterion) {
+		Criteria criteria = getSession().createCriteria(Micropost.class);
+		criteria.setProjection(Projections.rowCount());
+
+		return (Long) criteria.uniqueResult();
 	}
 
 }

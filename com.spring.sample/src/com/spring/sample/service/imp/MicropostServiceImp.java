@@ -8,10 +8,8 @@ import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.spring.sample.dao.MicropostDAO;
@@ -21,12 +19,9 @@ import com.spring.sample.model.UserModel;
 import com.spring.sample.service.MicropostService;
 
 @Service
-public class MicropostServiceImp implements MicropostService {
+public class MicropostServiceImp extends BaseServiceImpl implements MicropostService {
 
 	private static final Logger logger = LoggerFactory.getLogger(MicropostServiceImp.class);
-
-	@Autowired
-	MicropostDAO micropostDAO;
 
 	private MicropostServiceImp() {
 	}
@@ -53,7 +48,6 @@ public class MicropostServiceImp implements MicropostService {
 	}
 
 	@Override
-	@Transactional
 	public MicropostModel addMicropost(MicropostModel micropostModel) throws Exception {
 		logger.info("Adding the micropost in the database");
 		try {
@@ -71,7 +65,6 @@ public class MicropostServiceImp implements MicropostService {
 	}
 
 	@Override
-	@Transactional
 	public MicropostModel editMicropost(MicropostModel micropostModel) throws Exception {
 		logger.info("Updating the micropost in the database");
 		try {
@@ -88,7 +81,6 @@ public class MicropostServiceImp implements MicropostService {
 	}
 
 	@Override
-	@Transactional
 	public boolean deleteMicropost(MicropostModel micropostModel) throws Exception {
 		logger.info("Deleting the micropost in the database");
 		try {
@@ -122,7 +114,6 @@ public class MicropostServiceImp implements MicropostService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Page<MicropostModel> paginate(MicropostModel micropostModel) {
 		try {
 			Micropost condition = new Micropost();
@@ -141,16 +132,16 @@ public class MicropostServiceImp implements MicropostService {
 			return null;
 		}
 	}
+	
 
 	@Override
-	@Transactional(readOnly = true)
-	public int count(MicropostModel micropostModel) {
+	public Long count(MicropostModel micropostModel) {
 		logger.info("Counting the micropost in the database");
 		try {
 			return micropostDAO.count(Restrictions.eq("userId", micropostModel.getUserId()));
 		} catch (Exception e) {
 			logger.error("An error occurred while counting the micropost details from the database", e);
-			return 0;
+			return (long) 0;
 		}
 	}
 }
